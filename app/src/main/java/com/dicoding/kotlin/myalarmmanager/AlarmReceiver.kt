@@ -20,8 +20,6 @@ import java.util.*
 
 class AlarmReceiver : BroadcastReceiver() {
 
-    private lateinit var TIME_FORMAT: String
-
     override fun onReceive(context: Context, intent: Intent) {
         val type = intent.getStringExtra(EXTRA_TYPE)
         val message = intent.getStringExtra(EXTRA_MESSAGE)
@@ -113,5 +111,8 @@ class AlarmReceiver : BroadcastReceiver() {
         // Siapkan 2 id untuk 2 macam alarm, one time dan repeating
         private const val ID_ONETIME = 100
         private const val ID_REPEATING = 101
+
+        private const val DATE_FORMAT = "yyyy-MM-dd"
+        private const val TIME_FORMAT = "HH:mm"
     }
 }
