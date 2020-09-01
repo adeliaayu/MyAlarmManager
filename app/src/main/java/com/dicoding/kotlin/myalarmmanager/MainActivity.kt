@@ -48,30 +48,39 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
         }
     }
 
-    companion object {
-        private const val DATE_PICKER_TAG = "DatePicker"
-        private const val TIME_PICKER_ONCE_TAG = "TimePickerOnce"
-        private const val TIME_PICKER_REPEATE_TAG = "TimePickerRepeate"
-    }
-
     override fun onDialogDateSet(tag: String?, year: Int, month: Int, dayOfMonth: Int) {
+
+        // Siapkan date formatter-nya terlebih dahulu
         val calendar = Calendar.getInstance()
         calendar.set(year, month, dayOfMonth)
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
+        // Set text dari textview once
         tv_once_date.text = dateFormat.format(calendar.time)
     }
 
     override fun onDialogTimeSet(tag: String?, hourOfDay: Int, minute: Int) {
+
+        // Siapkan time formatternya terlebih dahulu
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
         calendar.set(Calendar.MINUTE, minute)
+
         val dateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+
+        // Set text dari textview berdasarkan tag
         when (tag) {
             TIME_PICKER_ONCE_TAG -> tv_once_time.text = dateFormat.format(calendar.time)
             else -> {
 
             }
         }
+    }
+
+    companion object {
+        private const val DATE_PICKER_TAG = "DatePicker"
+        private const val TIME_PICKER_ONCE_TAG = "TimePickerOnce"
+        private const val TIME_PICKER_REPEATE_TAG = "TimePickerRepeate"
     }
 
 }
