@@ -20,6 +20,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
         btn_once_time.setOnClickListener(this)
         btn_set_once_alarm.setOnClickListener(this)
 
+        btn_repeating_time.setOnClickListener(this)
+        btn_set_repeating_alarm.setOnClickListener(this)
+
         alarmReceiver = AlarmReceiver()
     }
 
@@ -43,6 +46,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
                     onceDate,
                     onceTime,
                     onceMessage
+                )
+            }
+            R.id.btn_repeating_time -> {
+                val timePickerFragmentRepeat = TimePickerFragment()
+                timePickerFragmentRepeat.show(supportFragmentManager, TIME_PICKER_REPEAT_TAG)
+            }
+            R.id.btn_set_repeating_alarm -> {
+                val repeatTime = tv_repeating_time.text.toString()
+                val repeatMessage = edt_repeating_message.text.toString()
+
+                alarmReceiver.setRepeatingAlarm(
+                    this, AlarmReceiver.TYPE_REPEATING,
+                    repeatTime,
+                    repeatMessage
                 )
             }
         }
@@ -71,6 +88,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
         // Set text dari textview berdasarkan tag
         when (tag) {
             TIME_PICKER_ONCE_TAG -> tv_once_time.text = dateFormat.format(calendar.time)
+            TIME_PICKER_REPEAT_TAG -> tv_repeating_time.text = dateFormat.format(calendar.time)
             else -> {
 
             }
@@ -80,7 +98,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
     companion object {
         private const val DATE_PICKER_TAG = "DatePicker"
         private const val TIME_PICKER_ONCE_TAG = "TimePickerOnce"
-        private const val TIME_PICKER_REPEATE_TAG = "TimePickerRepeate"
+        private const val TIME_PICKER_REPEAT_TAG = "TimePickerRepeate"
     }
 
 }
